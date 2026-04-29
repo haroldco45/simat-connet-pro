@@ -1,1 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMAT Connect Pro - Vibras Positivas HM</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #27ae60;
+            --bg: #f4f7f6;
+            --text: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), #34495e);
+            color: var(--white);
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .container {
+            flex: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--accent);
+        }
+
+        .datetime-container {
+            text-align: center;
+            background: var(--primary);
+            color: var(--white);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        #clock {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: block;
+            margin-top: 5px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        .law-highlight {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            margin: 10px 0;
+        }
+
+        .btn-action {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 15px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .btn-action:hover {
+            background: #219150;
+        }
+
+        footer {
+            background: #f1f1f1;
+            color: #666;
+            text-align: center;
+            padding: 25px 10px;
+            border-top: 1px solid #ddd;
+            font-size: 0.9rem;
+        }
+
+        .brand-footer {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            #clock { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;">VIBRAS POSITIVAS HM</div>
+        <h1 style="margin: 10px 0 0 0;">SIMAT Connect Pro</h1>
+        <p style="opacity: 0.8;">Gestión de Escolaridad y Decreto 1075</p>
+    </header>
+
+    <div class="container">
+        <div class="datetime-container">
+            <span>Fecha y Hora Legal en Colombia</span>
+            <div id="clock">Cargando...</div>
+        </div>
+
+        <div class="card">
+            <h2>Marco Normativo: Decreto 1075</h2>
+            <div class="law-highlight">
+                "Por el cual se expide el Decreto Único Reglamentario del Sector Educación."
+            </div>
+            <p>Este aplicativo permite el seguimiento de los lineamientos del SIMAT para garantizar la cobertura educativa y la asignación eficiente de recursos SGP en el 2026.</p>
+            <button class="btn-action" onclick="alert('Accediendo al compendio de normas de escolaridad...')">Consultar Articulado</button>
+        </div>
+
+        <div class="card" style="border-left-color: #3498db;">
+            <h2>Control de Matrículas y Novedades</h2>
+            <p>Estado del sistema: <strong>Auditoría Trimestral 2026</strong></p>
+            <ul style="line-height: 1.6;">
+                <li>Validación de Documentos de Identidad.</li>
+                <li>Reporte de traslados y deserciones.</li>
+                <li>Cruce de datos con programas de alimentación escolar.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="brand-footer">VIBRAS POSITIVAS HM</div>
+        <p><strong>Créditos de derechos de autor: Vibras Positivas HM</strong></p>
+        <p>Desarrollado por: Harold Augusto Marín Machado</p>
+        <p>Contacto: 3117700431 | Caucasia, Antioquia</p>
+        <p style="font-size: 0.7rem; margin-top: 15px;">&copy; 2026 Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            // Forzado a zona horaria de Colombia
+            const options = { 
+                timeZone: 'America/Bogota',
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true
+            };
+            
+            const formatter = new Intl.DateTimeFormat('es-CO', options);
+            document.getElementById('clock').textContent = formatter.format(now);
+        }
+
+        // Actualización constante cada segundo
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
 
