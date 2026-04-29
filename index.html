@@ -27,9 +27,8 @@
         header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: var(--white);
-            padding: 40px 20px;
+            padding: 40px 20px 60px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .brand-name {
@@ -43,8 +42,8 @@
         h1 { margin: 0; font-size: 2.2rem; font-weight: 700; }
 
         .container {
-            max-width: 1000px;
-            margin: -30px auto 40px;
+            max-width: 800px;
+            margin: -40px auto 40px;
             padding: 0 20px;
         }
 
@@ -54,69 +53,61 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        #clock {
-            font-size: 1.4rem;
+            margin-bottom: 25px;
             font-weight: bold;
             color: var(--primary-color);
         }
 
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
+        /* Estilo de Tarjetas de Navegación */
         .nav-card {
             background: var(--white);
-            padding: 25px;
+            padding: 30px;
             border-radius: 12px;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-bottom: 4px solid transparent;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid transparent;
         }
 
         .nav-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-bottom-color: var(--accent-color);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            border-color: var(--accent-color);
         }
 
         .nav-card i {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--primary-color);
             margin-bottom: 15px;
         }
 
-        .nav-card h3 { margin: 10px 0; color: var(--secondary-color); }
+        .nav-card h3 { margin: 10px 0; font-size: 1.5rem; color: var(--secondary-color); }
+        .nav-card p { color: #666; margin: 0; }
 
+        /* Secciones de Contenido */
         .content-section {
             background: var(--white);
-            padding: 40px;
+            padding: 30px;
             border-radius: 12px;
-            display: none;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            animation: fadeIn 0.5s;
+            display: none; /* Oculto por defecto */
+            margin-top: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--accent-color);
+            animation: slideDown 0.4s ease-out;
         }
 
-        .content-section.active { display: block; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .info-panel {
-            background: #eef2f7;
-            padding: 20px;
-            border-left: 5px solid var(--primary-color);
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
+            background: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid var(--primary-color);
+            margin: 15px 0;
         }
 
         footer {
@@ -124,14 +115,29 @@
             padding: 40px 20px;
             text-align: center;
             border-top: 1px solid #ddd;
-            margin-top: 40px;
         }
 
-        .footer-logo { font-weight: bold; color: var(--primary-color); margin-bottom: 10px; }
+        .vibras-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .btn-external {
+            background: var(--accent-color);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
         @media (max-width: 600px) {
             h1 { font-size: 1.8rem; }
-            .container { margin-top: -20px; }
         }
     </style>
 </head>
@@ -145,79 +151,72 @@
 
 <div class="container">
     <div class="timer-card">
-        <i class="far fa-calendar-alt"></i> <span id="clock">Cargando fecha y hora...</span>
+        <i class="far fa-calendar-alt"></i> <span id="clock">Cargando...</span>
     </div>
 
-    <div class="nav-grid">
-        <div class="nav-card" onclick="showSection('normativa')">
-            <i class="fas fa-gavel"></i>
-            <h3>Decreto 1075</h3>
-            <p>Compendio Normativo</p>
-        </div>
-        <div class="nav-card" onclick="showSection('simat-guia')">
-            <i class="fas fa-user-graduate"></i>
-            <h3>Guía SIMAT</h3>
-            <p>Procesos de Matrícula</p>
-        </div>
-        <div class="nav-card" onclick="showSection('gestion-2026')">
-            <i class="fas fa-chart-line"></i>
-            <h3>Gestión 2026</h3>
-            <p>Alertas y Operaciones</p>
-        </div>
+    <div class="nav-card" onclick="toggleSection('normativa')">
+        <i class="fas fa-gavel"></i>
+        <h3>Decreto 1075</h3>
+        <p>Compendio Normativo del Sector Educación</p>
     </div>
 
-    <div id="normativa" class="content-section active">
-        <h2><i class="fas fa-book-open"></i> Marco Legal: Decreto 1075 de 2015</h2>
-        <p>Este es el Decreto Único Reglamentario del Sector Educación, que compila todas las normas que rigen la escolaridad en Colombia.</p>
+    <div class="nav-card" onclick="toggleSection('guia-simat')">
+        <i class="fas fa-user-graduate"></i>
+        <h3>Guía SIMAT</h3>
+        <p>Procesos de Matrícula y Cobertura</p>
+    </div>
+
+    <div class="nav-card" onclick="toggleSection('alertas-2026')">
+        <i class="fas fa-exclamation-circle"></i>
+        <h3>Gestión 2026</h3>
+        <p>Alertas y Operaciones Críticas</p>
+    </div>
+
+    <div id="normativa" class="content-section">
+        <h2><i class="fas fa-book"></i> Marco Legal Educativo</h2>
+        <p>El Decreto 1075 de 2015 es el eje que unifica todas las normas del sector educación en Colombia.</p>
         <div class="info-panel">
-            <strong>Estructura del Decreto:</strong>
+            <strong>Temas Importantes:</strong>
             <ul>
-                <li><strong>Libro 1:</strong> Estructura del Sector Educativo.</li>
-                <li><strong>Libro 2:</strong> Régimen reglamentario del sector (Funcionamiento).</li>
-                <li><strong>Parte 3:</strong> Reglamentación de la educación preescolar, básica y media.</li>
+                <li>Reglamentación de establecimientos privados y públicos.</li>
+                <li>Normas sobre evaluación de estudiantes (Art. 2.3.3.1).</li>
+                <li>Gestión de la jornada única y recursos SGP.</li>
             </ul>
         </div>
-        <button class="nav-card" style="width:100%; border:none;" onclick="window.open('https://www.mineducacion.gov.co/1759/w3-article-351080.html', '_blank')">
-            <i class="fas fa-external-link-alt" style="font-size: 1.2rem;"></i> Abrir Documento Oficial
-        </button>
+        <button class="btn-external" onclick="window.open('https://www.mineducacion.gov.co/1759/w3-article-351080.html', '_blank')">Ver Decreto Original</button>
     </div>
 
-    <div id="simat-guia" class="content-section">
-        <h2><i class="fas fa-id-card"></i> Guía del Sistema SIMAT</h2>
-        <p>El SIMAT es el eje central para garantizar el derecho a la educación a través de un registro veraz.</p>
+    <div id="guia-simat" class="content-section">
+        <h2><i class="fas fa-database"></i> ¿Cómo funciona el SIMAT?</h2>
+        <p>Es la herramienta oficial para reportar la matrícula y asegurar los recursos estatales.</p>
         <div class="info-panel">
-            <h3>Pasos del Proceso Estudiantil:</h3>
+            <strong>Ciclo de Operación:</strong>
             <ol>
-                <li><strong>Inscripción:</strong> Registro de nuevos aspirantes.</li>
-                <li><strong>Matrícula:</strong> Formalización del cupo otorgado.</li>
-                <li><strong>Promoción:</strong> Registro del estado académico al finalizar el año.</li>
-                <li><strong>Seguimiento:</strong> Control de traslados y retiros.</li>
+                <li>Proyección: Planeación de cupos para el año siguiente.</li>
+                <li>Matrícula: Registro oficial del alumno en el aula.</li>
+                <li>Auditoría: Verificación física de la existencia del alumno.</li>
             </ol>
         </div>
     </div>
 
-    <div id="gestion-2026" class="content-section">
-        <h2><i class="fas fa-exclamation-triangle"></i> Operaciones Críticas 2026</h2>
+    <div id="alertas-2026" class="content-section">
+        <h2><i class="fas fa-bullhorn"></i> Prioridades Abril 2026</h2>
         <div class="info-panel">
-            <h3>Prioridades para el Mes Actual:</h3>
-            <ul>
-                <li><strong>Auditoría de Abril:</strong> Cruce obligatorio con Registraduría para evitar "niños fantasma".</li>
-                <li><strong>PAE:</strong> Sincronización de beneficiarios con el reporte de matrícula activa.</li>
-                <li><strong>SGP:</strong> Validación de datos para el giro de recursos del Sistema General de Participaciones.</li>
-            </ul>
+            <p><strong>Auditoría de Niños Fantasma:</strong> Verificación de asistencia presencial para giro de recursos del Sistema General de Participaciones.</p>
+            <p><strong>Cruce PAE:</strong> Asegurar que los datos de matrícula coincidan con el sistema de alimentación escolar.</p>
         </div>
     </div>
 </div>
 
 <footer>
-    <div class="footer-logo">VIBRAS POSITIVAS HM</div>
+    <div class="vibras-logo">VIBRAS POSITIVAS HM</div>
     <p><strong>Créditos de derechos de autor: Vibras Positivas HM</strong></p>
     <p>Desarrollado por: Harold Augusto Marín Machado</p>
-    <p>Línea de soporte: 3117700431</p>
-    <p style="font-size: 0.8rem; opacity: 0.6;">Caucasia, Antioquia | &copy; 2026</p>
+    <p>Contacto: 3117700431 | Caucasia, Antioquia</p>
 </footer>
 
 <script>
+    // Reloj en tiempo real para Colombia
     function updateClock() {
         const now = new Date();
         const options = { 
@@ -228,10 +227,21 @@
         document.getElementById('clock').textContent = new Intl.DateTimeFormat('es-CO', options).format(now);
     }
 
-    function showSection(id) {
-        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        window.scrollTo({ top: document.querySelector('.nav-grid').offsetTop - 20, behavior: 'smooth' });
+    // Función lógica para los botones
+    function toggleSection(id) {
+        // Ocultar todas las secciones primero
+        document.querySelectorAll('.content-section').forEach(section => {
+            if(section.id !== id) section.style.display = 'none';
+        });
+
+        // Mostrar u ocultar la seleccionada
+        const target = document.getElementById(id);
+        if (target.style.display === 'block') {
+            target.style.display = 'none';
+        } else {
+            target.style.display = 'block';
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
     }
 
     setInterval(updateClock, 1000);
