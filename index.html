@@ -84,7 +84,7 @@
             display: inline-block;
             background: var(--accent);
             color: white;
-            padding: 12px 25px;
+            padding: 15px 25px;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
@@ -93,10 +93,13 @@
             cursor: pointer;
             transition: background 0.3s;
             width: 100%;
+            font-size: 1rem;
+            text-transform: uppercase;
         }
 
         .btn-action:hover {
             background: #219150;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
         }
 
         footer {
@@ -141,16 +144,17 @@
                 "Por el cual se expide el Decreto Único Reglamentario del Sector Educación."
             </div>
             <p>Este aplicativo permite el seguimiento de los lineamientos del SIMAT para garantizar la cobertura educativa y la asignación eficiente de recursos SGP en el 2026.</p>
-            <button class="btn-action" onclick="alert('Accediendo al compendio de normas de escolaridad...')">Consultar Articulado</button>
+            
+            <button class="btn-action" onclick="consultarArticulado()">Consultar Articulado Oficial</button>
         </div>
 
         <div class="card" style="border-left-color: #3498db;">
             <h2>Control de Matrículas y Novedades</h2>
             <p>Estado del sistema: <strong>Auditoría Trimestral 2026</strong></p>
             <ul style="line-height: 1.6;">
-                <li>Validación de Documentos de Identidad.</li>
-                <li>Reporte de traslados y deserciones.</li>
-                <li>Cruce de datos con programas de alimentación escolar.</li>
+                <li>Validación de Documentos de Identidad (Cruce Registraduría).</li>
+                <li>Reporte de traslados, retiros y deserciones.</li>
+                <li>Cruce de datos con programas de alimentación escolar (PAE).</li>
             </ul>
         </div>
     </div>
@@ -164,9 +168,9 @@
     </footer>
 
     <script>
+        // Función para actualizar el reloj en tiempo real
         function updateClock() {
             const now = new Date();
-            // Forzado a zona horaria de Colombia
             const options = { 
                 timeZone: 'America/Bogota',
                 weekday: 'long', 
@@ -183,10 +187,19 @@
             document.getElementById('clock').textContent = formatter.format(now);
         }
 
-        // Actualización constante cada segundo
+        // Función corregida para el botón de consulta
+        function consultarArticulado() {
+            const urlOficial = 'https://www.mineducacion.gov.co/1759/w3-article-351080.html';
+            const confirmacion = confirm("¿Deseas salir de la app para consultar el Decreto 1075 original en el portal del Ministerio de Educación?");
+            
+            if (confirmacion) {
+                window.open(urlOficial, '_blank');
+            }
+        }
+
+        // Intervalo de 1 segundo para el reloj
         setInterval(updateClock, 1000);
         updateClock();
     </script>
 </body>
 </html>
-
