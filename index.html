@@ -4,195 +4,239 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIMAT Connect Pro - Vibras Positivas HM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2c3e50;
-            --accent: #27ae60;
-            --bg: #f4f7f6;
-            --text: #333;
+            --primary-color: #1a3a5a;
+            --secondary-color: #2c3e50;
+            --accent-color: #27ae60;
+            --text-color: #333;
+            --bg-color: #f0f2f5;
             --white: #ffffff;
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            line-height: 1.6;
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary), #34495e);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: var(--white);
-            padding: 1.5rem 1rem;
+            padding: 40px 20px;
             text-align: center;
-            box-shadow: var(--shadow);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
+
+        .brand-name {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        h1 { margin: 0; font-size: 2.2rem; font-weight: 700; }
 
         .container {
-            flex: 1;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 15px;
-            width: 100%;
-            box-sizing: border-box;
+            max-width: 1000px;
+            margin: -30px auto 40px;
+            padding: 0 20px;
         }
 
-        .datetime-container {
-            text-align: center;
-            background: var(--primary);
-            color: var(--white);
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        #clock { font-size: 1.2rem; font-weight: bold; display: block; }
-
-        /* Sistema de Pestañas */
-        .tabs {
-            display: flex;
-            background: #ddd;
-            border-radius: 8px 8px 0 0;
-            overflow: hidden;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            background: #ddd;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .tab-btn.active {
+        .timer-card {
             background: var(--white);
-            color: var(--accent);
-            border-bottom: 3px solid var(--accent);
-        }
-
-        .tab-content {
-            background: var(--white);
+            border-radius: 12px;
             padding: 20px;
-            border-radius: 0 0 8px 8px;
-            box-shadow: var(--shadow);
-            display: none;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
         }
 
-        .tab-content.active { display: block; }
+        #clock {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
 
-        .info-box {
-            background: #f9f9f9;
-            border-left: 4px solid var(--accent);
-            padding: 15px;
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .nav-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-bottom: 4px solid transparent;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .nav-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
             margin-bottom: 15px;
         }
 
-        h3 { color: var(--primary); margin-top: 0; }
+        .nav-card h3 { margin: 10px 0; color: var(--secondary-color); }
 
-        footer {
-            background: #f1f1f1;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-            border-top: 1px solid #ddd;
+        .content-section {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            display: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            animation: fadeIn 0.5s;
         }
 
-        .brand-footer { color: var(--primary); font-weight: bold; }
+        .content-section.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .info-panel {
+            background: #eef2f7;
+            padding: 20px;
+            border-left: 5px solid var(--primary-color);
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        footer {
+            background: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+            margin-top: 40px;
+        }
+
+        .footer-logo { font-weight: bold; color: var(--primary-color); margin-bottom: 10px; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .container { margin-top: -20px; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;">VIBRAS POSITIVAS HM</div>
-        <h1 style="margin: 5px 0;">SIMAT Connect Pro</h1>
-    </header>
+<header>
+    <div class="brand-name">VIBRAS POSITIVAS HM</div>
+    <h1>SIMAT Connect Pro</h1>
+    <p>Guía de Gestión Escolar y Decreto 1075</p>
+</header>
 
-    <div class="container">
-        <div class="datetime-container">
-            <span id="clock">Cargando...</span>
+<div class="container">
+    <div class="timer-card">
+        <i class="far fa-calendar-alt"></i> <span id="clock">Cargando fecha y hora...</span>
+    </div>
+
+    <div class="nav-grid">
+        <div class="nav-card" onclick="showSection('normativa')">
+            <i class="fas fa-gavel"></i>
+            <h3>Decreto 1075</h3>
+            <p>Compendio Normativo</p>
         </div>
-
-        <div class="tabs">
-            <button class="tab-btn active" onclick="openTab(event, 'decreto')">Decreto 1075</button>
-            <button class="tab-btn" onclick="openTab(event, 'simat')">Guía SIMAT</button>
-            <button class="tab-btn" onclick="openTab(event, 'gestion')">Gestión 2026</button>
+        <div class="nav-card" onclick="showSection('simat-guia')">
+            <i class="fas fa-user-graduate"></i>
+            <h3>Guía SIMAT</h3>
+            <p>Procesos de Matrícula</p>
         </div>
-
-        <div id="decreto" class="tab-content active">
-            <h3>Compendio Normativo</h3>
-            <div class="info-box">
-                <strong>¿Qué es?</strong> Es el Decreto Único Reglamentario del Sector Educación en Colombia.
-            </div>
-            <p><strong>Puntos Clave:</strong></p>
-            <ul>
-                <li><strong>Sección 1.1.1.1:</strong> Define la estructura del sector educativo nacional.</li>
-                <li><strong>Libro 2:</strong> Reglamenta la prestación del servicio educativo oficial y privado.</li>
-                <li><strong>Art. 2.3.3.1:</strong> Establece las reglas sobre evaluación y promoción de estudiantes.</li>
-            </ul>
-        </div>
-
-        <div id="simat" class="tab-content">
-            <h3>Funcionamiento del SIMAT</h3>
-            <p>El Sistema de Matrícula Estudiantil es el proceso anual para organizar la oferta y la demanda.</p>
-            <div class="info-box">
-                <strong>Etapas Clave:</strong>
-                <ol>
-                    <li>Proyección de cupos.</li>
-                    <li>Reserva de cupos y traslados.</li>
-                    <li>Inscripción de alumnos nuevos.</li>
-                    <li>Matrícula oficial y auditoría.</li>
-                </ol>
-            </div>
-        </div>
-
-        <div id="gestion" class="tab-content">
-            <h3>Alertas y Operaciones 2026</h3>
-            <p>Seguimiento para el primer semestre del 2026 en Caucasia y Antioquia:</p>
-            <ul>
-                <li><strong>Cruce PAE:</strong> Verificar que todo alumno beneficiario de alimentación esté activo.</li>
-                <li><strong>Retiros:</strong> Reportar deserciones antes del próximo corte financiero.</li>
-                <li><strong>SGP:</strong> Los recursos se giran según el reporte de este mes.</li>
-            </ul>
+        <div class="nav-card" onclick="showSection('gestion-2026')">
+            <i class="fas fa-chart-line"></i>
+            <h3>Gestión 2026</h3>
+            <p>Alertas y Operaciones</p>
         </div>
     </div>
 
-    <footer>
-        <div class="brand-footer">VIBRAS POSITIVAS HM</div>
-        <p><strong>Créditos de derechos de autor: Vibras Positivas HM</strong></p>
-        <p>Desarrollado por: Harold Augusto Marín Machado</p>
-        <p>Contacto: 3117700431</p>
-    </footer>
+    <div id="normativa" class="content-section active">
+        <h2><i class="fas fa-book-open"></i> Marco Legal: Decreto 1075 de 2015</h2>
+        <p>Este es el Decreto Único Reglamentario del Sector Educación, que compila todas las normas que rigen la escolaridad en Colombia.</p>
+        <div class="info-panel">
+            <strong>Estructura del Decreto:</strong>
+            <ul>
+                <li><strong>Libro 1:</strong> Estructura del Sector Educativo.</li>
+                <li><strong>Libro 2:</strong> Régimen reglamentario del sector (Funcionamiento).</li>
+                <li><strong>Parte 3:</strong> Reglamentación de la educación preescolar, básica y media.</li>
+            </ul>
+        </div>
+        <button class="nav-card" style="width:100%; border:none;" onclick="window.open('https://www.mineducacion.gov.co/1759/w3-article-351080.html', '_blank')">
+            <i class="fas fa-external-link-alt" style="font-size: 1.2rem;"></i> Abrir Documento Oficial
+        </button>
+    </div>
 
-    <script>
-        function updateClock() {
-            const now = new Date();
-            const options = { 
-                timeZone: 'America/Bogota',
-                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-                hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
-            };
-            document.getElementById('clock').textContent = new Intl.DateTimeFormat('es-CO', options).format(now);
-        }
+    <div id="simat-guia" class="content-section">
+        <h2><i class="fas fa-id-card"></i> Guía del Sistema SIMAT</h2>
+        <p>El SIMAT es el eje central para garantizar el derecho a la educación a través de un registro veraz.</p>
+        <div class="info-panel">
+            <h3>Pasos del Proceso Estudiantil:</h3>
+            <ol>
+                <li><strong>Inscripción:</strong> Registro de nuevos aspirantes.</li>
+                <li><strong>Matrícula:</strong> Formalización del cupo otorgado.</li>
+                <li><strong>Promoción:</strong> Registro del estado académico al finalizar el año.</li>
+                <li><strong>Seguimiento:</strong> Control de traslados y retiros.</li>
+            </ol>
+        </div>
+    </div>
 
-        function openTab(evt, tabName) {
-            let i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
+    <div id="gestion-2026" class="content-section">
+        <h2><i class="fas fa-exclamation-triangle"></i> Operaciones Críticas 2026</h2>
+        <div class="info-panel">
+            <h3>Prioridades para el Mes Actual:</h3>
+            <ul>
+                <li><strong>Auditoría de Abril:</strong> Cruce obligatorio con Registraduría para evitar "niños fantasma".</li>
+                <li><strong>PAE:</strong> Sincronización de beneficiarios con el reporte de matrícula activa.</li>
+                <li><strong>SGP:</strong> Validación de datos para el giro de recursos del Sistema General de Participaciones.</li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
+<footer>
+    <div class="footer-logo">VIBRAS POSITIVAS HM</div>
+    <p><strong>Créditos de derechos de autor: Vibras Positivas HM</strong></p>
+    <p>Desarrollado por: Harold Augusto Marín Machado</p>
+    <p>Línea de soporte: 3117700431</p>
+    <p style="font-size: 0.8rem; opacity: 0.6;">Caucasia, Antioquia | &copy; 2026</p>
+</footer>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        const options = { 
+            timeZone: 'America/Bogota',
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+            hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+        };
+        document.getElementById('clock').textContent = new Intl.DateTimeFormat('es-CO', options).format(now);
+    }
+
+    function showSection(id) {
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        window.scrollTo({ top: document.querySelector('.nav-grid').offsetTop - 20, behavior: 'smooth' });
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+</script>
+
 </body>
 </html>
