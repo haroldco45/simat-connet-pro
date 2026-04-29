@@ -28,7 +28,7 @@
         header {
             background: linear-gradient(135deg, var(--primary), #34495e);
             color: var(--white);
-            padding: 2rem 1rem;
+            padding: 1.5rem 1rem;
             text-align: center;
             box-shadow: var(--shadow);
         }
@@ -37,124 +37,128 @@
             flex: 1;
             max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
             width: 100%;
             box-sizing: border-box;
-        }
-
-        .card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow);
-            border-left: 5px solid var(--accent);
         }
 
         .datetime-container {
             text-align: center;
             background: var(--primary);
             color: var(--white);
-            padding: 15px;
+            padding: 12px;
             border-radius: 8px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
-        #clock {
-            font-size: 1.5rem;
-            font-weight: bold;
-            display: block;
-            margin-top: 5px;
+        #clock { font-size: 1.2rem; font-weight: bold; display: block; }
+
+        /* Sistema de Pestañas */
+        .tabs {
+            display: flex;
+            background: #ddd;
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
         }
 
-        h2 {
-            margin-top: 0;
-            color: var(--primary);
-        }
-
-        .law-highlight {
-            background: #e8f5e9;
-            padding: 15px;
-            border-radius: 8px;
-            font-style: italic;
-            margin: 10px 0;
-        }
-
-        .btn-action {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 15px 25px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 15px;
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
             border: none;
+            background: #ddd;
             cursor: pointer;
-            transition: background 0.3s;
-            width: 100%;
-            font-size: 1rem;
-            text-transform: uppercase;
+            font-weight: bold;
+            transition: 0.3s;
         }
 
-        .btn-action:hover {
-            background: #219150;
-            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        .tab-btn.active {
+            background: var(--white);
+            color: var(--accent);
+            border-bottom: 3px solid var(--accent);
         }
+
+        .tab-content {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: var(--shadow);
+            display: none;
+        }
+
+        .tab-content.active { display: block; }
+
+        .info-box {
+            background: #f9f9f9;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        h3 { color: var(--primary); margin-top: 0; }
 
         footer {
             background: #f1f1f1;
-            color: #666;
             text-align: center;
-            padding: 25px 10px;
-            border-top: 1px solid #ddd;
+            padding: 20px;
             font-size: 0.9rem;
+            border-top: 1px solid #ddd;
         }
 
-        .brand-footer {
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
-
-        @media (max-width: 600px) {
-            .container { padding: 10px; }
-            #clock { font-size: 1.2rem; }
-        }
+        .brand-footer { color: var(--primary); font-weight: bold; }
     </style>
 </head>
 <body>
 
     <header>
-        <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;">VIBRAS POSITIVAS HM</div>
-        <h1 style="margin: 10px 0 0 0;">SIMAT Connect Pro</h1>
-        <p style="opacity: 0.8;">Gestión de Escolaridad y Decreto 1075</p>
+        <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;">VIBRAS POSITIVAS HM</div>
+        <h1 style="margin: 5px 0;">SIMAT Connect Pro</h1>
     </header>
 
     <div class="container">
         <div class="datetime-container">
-            <span>Fecha y Hora Legal en Colombia</span>
-            <div id="clock">Cargando...</div>
+            <span id="clock">Cargando...</span>
         </div>
 
-        <div class="card">
-            <h2>Marco Normativo: Decreto 1075</h2>
-            <div class="law-highlight">
-                "Por el cual se expide el Decreto Único Reglamentario del Sector Educación."
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'decreto')">Decreto 1075</button>
+            <button class="tab-btn" onclick="openTab(event, 'simat')">Guía SIMAT</button>
+            <button class="tab-btn" onclick="openTab(event, 'gestion')">Gestión 2026</button>
+        </div>
+
+        <div id="decreto" class="tab-content active">
+            <h3>Compendio Normativo</h3>
+            <div class="info-box">
+                <strong>¿Qué es?</strong> Es el Decreto Único Reglamentario del Sector Educación en Colombia.
             </div>
-            <p>Este aplicativo permite el seguimiento de los lineamientos del SIMAT para garantizar la cobertura educativa y la asignación eficiente de recursos SGP en el 2026.</p>
-            
-            <button class="btn-action" onclick="consultarArticulado()">Consultar Articulado Oficial</button>
+            <p><strong>Puntos Clave:</strong></p>
+            <ul>
+                <li><strong>Sección 1.1.1.1:</strong> Define la estructura del sector educativo nacional.</li>
+                <li><strong>Libro 2:</strong> Reglamenta la prestación del servicio educativo oficial y privado.</li>
+                <li><strong>Art. 2.3.3.1:</strong> Establece las reglas sobre evaluación y promoción de estudiantes.</li>
+            </ul>
         </div>
 
-        <div class="card" style="border-left-color: #3498db;">
-            <h2>Control de Matrículas y Novedades</h2>
-            <p>Estado del sistema: <strong>Auditoría Trimestral 2026</strong></p>
-            <ul style="line-height: 1.6;">
-                <li>Validación de Documentos de Identidad (Cruce Registraduría).</li>
-                <li>Reporte de traslados, retiros y deserciones.</li>
-                <li>Cruce de datos con programas de alimentación escolar (PAE).</li>
+        <div id="simat" class="tab-content">
+            <h3>Funcionamiento del SIMAT</h3>
+            <p>El Sistema de Matrícula Estudiantil es el proceso anual para organizar la oferta y la demanda.</p>
+            <div class="info-box">
+                <strong>Etapas Clave:</strong>
+                <ol>
+                    <li>Proyección de cupos.</li>
+                    <li>Reserva de cupos y traslados.</li>
+                    <li>Inscripción de alumnos nuevos.</li>
+                    <li>Matrícula oficial y auditoría.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div id="gestion" class="tab-content">
+            <h3>Alertas y Operaciones 2026</h3>
+            <p>Seguimiento para el primer semestre del 2026 en Caucasia y Antioquia:</p>
+            <ul>
+                <li><strong>Cruce PAE:</strong> Verificar que todo alumno beneficiario de alimentación esté activo.</li>
+                <li><strong>Retiros:</strong> Reportar deserciones antes del próximo corte financiero.</li>
+                <li><strong>SGP:</strong> Los recursos se giran según el reporte de este mes.</li>
             </ul>
         </div>
     </div>
@@ -163,41 +167,30 @@
         <div class="brand-footer">VIBRAS POSITIVAS HM</div>
         <p><strong>Créditos de derechos de autor: Vibras Positivas HM</strong></p>
         <p>Desarrollado por: Harold Augusto Marín Machado</p>
-        <p>Contacto: 3117700431 | Caucasia, Antioquia</p>
-        <p style="font-size: 0.7rem; margin-top: 15px;">&copy; 2026 Todos los derechos reservados.</p>
+        <p>Contacto: 3117700431</p>
     </footer>
 
     <script>
-        // Función para actualizar el reloj en tiempo real
         function updateClock() {
             const now = new Date();
             const options = { 
                 timeZone: 'America/Bogota',
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                hour: '2-digit', 
-                minute: '2-digit', 
-                second: '2-digit',
-                hour12: true
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+                hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
             };
-            
-            const formatter = new Intl.DateTimeFormat('es-CO', options);
-            document.getElementById('clock').textContent = formatter.format(now);
+            document.getElementById('clock').textContent = new Intl.DateTimeFormat('es-CO', options).format(now);
         }
 
-        // Función corregida para el botón de consulta
-        function consultarArticulado() {
-            const urlOficial = 'https://www.mineducacion.gov.co/1759/w3-article-351080.html';
-            const confirmacion = confirm("¿Deseas salir de la app para consultar el Decreto 1075 original en el portal del Ministerio de Educación?");
-            
-            if (confirmacion) {
-                window.open(urlOficial, '_blank');
-            }
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
         }
 
-        // Intervalo de 1 segundo para el reloj
         setInterval(updateClock, 1000);
         updateClock();
     </script>
